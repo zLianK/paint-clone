@@ -1,31 +1,22 @@
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.JPanel;
 
 public class PaintDrawablePanel extends JPanel {
 
-    private Color currentColor;
+    private ColorPanel colorPanel;
 
     MouseMotionAdapter mmAdapter = new MouseMotionAdapter() {
         @Override
         public void mouseDragged(MouseEvent e) {
-            var point = new Point(e.getX(), e.getY(), currentColor);
+            var point = new Point(e.getX(), e.getY(), colorPanel.getCurrentColor());
             point.paint(getGraphics());
         }
     };
 
-    public PaintDrawablePanel() {
-        this.currentColor = Color.BLACK;
+    public PaintDrawablePanel(ColorPanel colorPanel) {
+        this.colorPanel = colorPanel;
         addMouseMotionListener(mmAdapter);
     }
-
-    public void setCurrentColor(Color color) {
-        this.currentColor = color;
-    }
-
-    public Color getCurrentColor() {
-        return currentColor;
-    }
-
 }
