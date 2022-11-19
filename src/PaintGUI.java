@@ -1,8 +1,6 @@
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
 
 public class PaintGUI extends JFrame {
 
@@ -12,8 +10,7 @@ public class PaintGUI extends JFrame {
 
     public void run() {
         setUp();
-        setJMenuBar(createPaintMenuBar());
-        add(createButtonsPanel(), BorderLayout.WEST);
+        setComponents();
         setVisible(true);
     }
 
@@ -24,13 +21,9 @@ public class PaintGUI extends JFrame {
         setTitle(TITLE);
     }
 
-    private JMenuBar createPaintMenuBar() {
-        var menuBar = new PaintMenuBar();
-        return menuBar.createPaintMenuBar();
-    }
-
-    private JPanel createButtonsPanel() {
-        var colorPanel = new ColorPanel();
-        return colorPanel.createPanel();
+    private void setComponents() {
+        setJMenuBar(new PaintMenuBar());
+        add(new ColorPanel(), BorderLayout.WEST);
+        add(new PaintDrawablePanel(), BorderLayout.CENTER);
     }
 }

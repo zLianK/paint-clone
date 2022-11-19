@@ -4,7 +4,8 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 public class ColorPanel extends JPanel {
-    public JPanel createPanel() {
+
+    public ColorPanel() {
         setLayout(new GridLayout(0, 1));
         var button = new PaintButton(Color.BLACK);
         add(button);
@@ -30,6 +31,5 @@ public class ColorPanel extends JPanel {
         add(button);
         button = new PaintButton(Color.YELLOW);
         add(button);
-        return this;
     }
 }
