@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -19,42 +20,27 @@ public class ColorPanel extends JPanel {
     public ColorPanel() {
         currentColor = Color.BLACK;
         setLayout(new GridLayout(0, 1));
-        var button = new PaintButton(Color.BLACK);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.BLUE);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.CYAN);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.GRAY);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.GREEN);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.LIGHT_GRAY);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.MAGENTA);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.ORANGE);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.PINK);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.RED);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.WHITE);
-        button.addActionListener(buttonColorListener);
-        add(button);
-        button = new PaintButton(Color.YELLOW);
-        button.addActionListener(buttonColorListener);
-        add(button);
+
+        ArrayList<Color> colors = new ArrayList<>();
+        colors.add(Color.BLACK);
+        colors.add(Color.BLUE);
+        colors.add(Color.CYAN);
+        colors.add(Color.GRAY);
+        colors.add(Color.GREEN);
+        colors.add(Color.LIGHT_GRAY);
+        colors.add(Color.MAGENTA);
+        colors.add(Color.ORANGE);
+        colors.add(Color.PINK);
+        colors.add(Color.RED);
+        colors.add(Color.WHITE);
+        colors.add(Color.YELLOW);
+
+        PaintButton button;
+        for (Color color : colors) {
+            button = new PaintButton(color);
+            button.addActionListener(buttonColorListener);
+            add(button);
+        }
     }
 
     public void setCurrentColor(Color currentColor) {
