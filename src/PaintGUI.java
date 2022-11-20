@@ -22,9 +22,10 @@ public class PaintGUI extends JFrame {
     }
 
     private void setComponents() {
-        setJMenuBar(new PaintMenuBar());
         var colorPanel = new ColorPanel();
         add(colorPanel, BorderLayout.WEST);
-        add(new PaintDrawablePanel(colorPanel), BorderLayout.CENTER);
+        var drawablePanel = new PaintDrawablePanel(colorPanel);
+        add(drawablePanel, BorderLayout.CENTER);
+        setJMenuBar(new PaintMenuBar(drawablePanel));
     }
 }
