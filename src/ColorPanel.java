@@ -20,7 +20,15 @@ public class ColorPanel extends JPanel {
     public ColorPanel() {
         currentColor = Color.BLACK;
         setLayout(new GridLayout(0, 1));
+        PaintButton button;
+        for (Color color : getAllColors()) {
+            button = new PaintButton(color);
+            button.addActionListener(buttonColorListener);
+            add(button);
+        }
+    }
 
+    private ArrayList<Color> getAllColors() {
         ArrayList<Color> colors = new ArrayList<>();
         colors.add(Color.BLACK);
         colors.add(Color.BLUE);
@@ -34,13 +42,7 @@ public class ColorPanel extends JPanel {
         colors.add(Color.RED);
         colors.add(Color.WHITE);
         colors.add(Color.YELLOW);
-
-        PaintButton button;
-        for (Color color : colors) {
-            button = new PaintButton(color);
-            button.addActionListener(buttonColorListener);
-            add(button);
-        }
+        return colors;
     }
 
     public void setCurrentColor(Color currentColor) {
