@@ -1,5 +1,6 @@
 import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class PaintMenuBar extends JMenuBar {
@@ -19,7 +21,7 @@ public class PaintMenuBar extends JMenuBar {
     private PaintDrawablePanel drawablePanel;
 
     private ActionListener saveFileListener = new ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
             var filePathOptional = openSaveDialog();
             if (!filePathOptional.isEmpty()) {
                 saveFile(filePathOptional.get());
@@ -27,13 +29,54 @@ public class PaintMenuBar extends JMenuBar {
         }
     };
 
+    private ActionListener aboutListener = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            var textMessage = "Programação II";
+            JOptionPane.showMessageDialog(null, textMessage, "Sobre", JOptionPane.INFORMATION_MESSAGE);
+        }
+    };
+
+    private ActionListener exitListener = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
+    };
+
     public PaintMenuBar(PaintDrawablePanel drawablePanel) {
         this.drawablePanel = drawablePanel;
+        add(createFileMenu());
+        add(createHelpMenu());
+    }
+
+    private JMenu createFileMenu() {
         var menuFile = new JMenu("Arquivo");
+        menuFile.add(createSaveItem());
+        menuFile.add(createExitItem());
+        return menuFile;
+    }
+
+    private JMenuItem createSaveItem() {
         var saveItem = new JMenuItem("Salvar");
         saveItem.addActionListener(saveFileListener);
-        menuFile.add(saveItem);
-        add(menuFile);
+        return saveItem;
+    }
+
+    private JMenuItem createExitItem() {
+        var exitItem = new JMenuItem("Sair");
+        exitItem.addActionListener(exitListener);
+        return exitItem;
+    }
+
+    private JMenu createHelpMenu() {
+        var helpMenu = new JMenu("Ajuda");
+        helpMenu.add(createAboutItem());
+        return helpMenu;
+    }
+
+    private JMenuItem createAboutItem() {
+        var aboutItem = new JMenuItem("Sobre");
+        aboutItem.addActionListener(aboutListener);
+        return aboutItem;
     }
 
     private Optional<File> openSaveDialog() {
