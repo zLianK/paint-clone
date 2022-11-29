@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 public class PaintDrawablePanel extends JPanel {
 
     private ColorPanel colorPanel;
+    private PaintFooter paintFooter;
     private Stack<Point> inPoints = new Stack<>();
 
     MouseMotionAdapter mmAdapter = new MouseMotionAdapter() {
@@ -17,11 +18,13 @@ public class PaintDrawablePanel extends JPanel {
             var point = new Point(e.getX(), e.getY(), colorPanel.getCurrentColor());
             inPoints.push(point);
             point.paint(getGraphics());
+            paintFooter.getTextField().setText(PaintFooterMessage.UNSAVED_FILE);
         }
     };
 
-    public PaintDrawablePanel(ColorPanel colorPanel) {
+    public PaintDrawablePanel(ColorPanel colorPanel, PaintFooter paintFooter) {
         this.colorPanel = colorPanel;
+        this.paintFooter = paintFooter;
         addMouseMotionListener(mmAdapter);
     }
 

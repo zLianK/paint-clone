@@ -19,12 +19,14 @@ public class PaintMenuBar extends JMenuBar {
     private final String EXTENSION_NAME = "jpg";
     private final String EXTENSION = ".".concat(EXTENSION_NAME);
     private PaintDrawablePanel drawablePanel;
+    public PaintFooter paintFooter;
 
     private ActionListener saveFileListener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             var filePathOptional = openSaveDialog();
             if (!filePathOptional.isEmpty()) {
                 saveFile(filePathOptional.get());
+                setSavedFileMessage();
             }
         }
     };
@@ -42,8 +44,9 @@ public class PaintMenuBar extends JMenuBar {
         }
     };
 
-    public PaintMenuBar(PaintDrawablePanel drawablePanel) {
+    public PaintMenuBar(PaintDrawablePanel drawablePanel, PaintFooter paintFooter) {
         this.drawablePanel = drawablePanel;
+        this.paintFooter = paintFooter;
         add(createFileMenu());
         add(createHelpMenu());
     }
@@ -116,5 +119,9 @@ public class PaintMenuBar extends JMenuBar {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setSavedFileMessage() {
+        this.paintFooter.getTextField().setText(PaintFooterMessage.SAVED_FILE);
     }
 }
