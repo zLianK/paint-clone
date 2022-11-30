@@ -20,15 +20,9 @@ public class Point {
     public void paint(Graphics graphics) {
         var graphics2D = (Graphics2D) graphics;
         graphics2D.setColor(color);
-
-        var stroke = new BasicStroke(size, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-        graphics2D.setStroke(stroke);
+        graphics2D.setStroke(new BasicStroke(size, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         if (previous != null) {
-            graphics2D.drawLine(
-                    getX(),
-                    getY(),
-                    getPrevious().getX(),
-                    getPrevious().getY());
+            graphics2D.drawLine(getX(), getY(), getPrevious().getX(), getPrevious().getY());
         }
     }
 
